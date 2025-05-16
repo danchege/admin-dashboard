@@ -1,0 +1,376 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mannabay Foundation - Staff Management</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header class="main-header">
+        <div class="logo-container">
+            <img src="default-avatar.png" alt="Mannabay Foundation Logo" class="logo">
+            <h1>Mannabay Foundation Staff Management</h1>
+        </div>
+        <nav class="main-nav">
+            <ul>
+                <li><a href="#" class="active">Dashboard</a></li>
+                <li><a href="#">Staff</a></li>
+                <li><a href="#">Departments</a></li>
+                <li><a href="#">Reports</a></li>
+                <li><a href="#">Settings</a></li>
+            </ul>
+            <div class="user-profile">
+                <span>Admin User</span>
+                <img src="default-avatar.png" alt="User Avatar" class="avatar">
+            </div>
+        </nav>
+    </header>
+
+    <main class="content-area">
+        <aside class="sidebar">
+            <div class="sidebar-menu">
+                <h3>Quick Actions</h3>
+                <ul>
+                    <li><button id="addStaffBtn" class="sidebar-btn">+ Add New Staff</button></li>
+                    <li><button class="sidebar-btn">View All Staff</button></li>
+                    <li><button class="sidebar-btn">Pending Leave Requests</button></li>
+                    <li><button class="sidebar-btn">Performance Reviews</button></li>
+                </ul>
+                
+                <h3>Filters</h3>
+                <div class="filter-section">
+                    <label for="wardFilter">By Ward:</label>
+                    <select id="wardFilter" class="filter-select">
+                        <option value="">All Wards</option>
+                        <option value="Bahati">Bahati</option>
+                        <option value="Kiamaina">Kiamaina</option>
+                        <option value="Dundori">Dundori</option>
+                        <option value="Lanet">Lanet</option>
+                        <option value="Kabatini">Kabatini</option>
+                    </select>
+                    
+                    <label for="deptFilter">By Department:</label>
+                    <select id="deptFilter" class="filter-select">
+                        <option value="">All Departments</option>
+                        <option value="Administration">Administration</option>
+                        <option value="Programs">Programs</option>
+                        <option value="Finance">Finance</option>
+                        <option value="HR">Human Resources</option>
+                    </select>
+                    
+                    <label for="rankFilter">By Rank:</label>
+                    <select id="rankFilter" class="filter-select">
+                        <option value="">All Ranks</option>
+                        <option value="Executive Director">Executive Director</option>
+                        <option value="Program Manager">Program Manager</option>
+                        <option value="Field Officer">Field Officer</option>
+                    </select>
+                    
+                    <button id="applyFilters" class="filter-btn">Apply Filters</button>
+                    <button id="resetFilters" class="filter-btn">Reset</button>
+                </div>
+            </div>
+        </aside>
+
+        <section class="main-content">
+            <div class="dashboard-header">
+                <h2>Staff Dashboard</h2>
+                <div class="search-box">
+                    <input type="text" id="staffSearch" placeholder="Search staff by name or ID...">
+                    <button id="searchBtn">Search</button>
+                </div>
+            </div>
+            
+            <div class="stats-container">
+                <div class="stat-card">
+                    <h3>Total Staff</h3>
+                    <p class="stat-number"></p>
+                </div>
+                <div class="stat-card">
+                    <h3>Active Staff</h3>
+                    <p class="stat-number"></p>
+                </div>
+                <div class="stat-card">
+                    <h3>On Leave</h3>
+                    <p class="stat-number"></p>
+                </div>
+                <div class="stat-card">
+                    <h3>New This Month</h3>
+                    <p class="stat-number"></p>
+                </div>
+            </div>
+            
+            <div class="staff-table-container">
+                <table id="staffTable" class="staff-table">
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Name</th>
+                            <th>Ward</th>
+                            <th>Department</th>
+                            <th>Position</th>
+                            <th>Status</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <!-- Sample data rows -->
+                        <tr>
+                            <td>MBF001</td>
+                            <td>John Kamau</td>
+                            <td>Kiamaina</td>
+                            <td>Administration</td>
+                            <td>Executive Director</td>
+                            <td><span class="status-active">Active</span></td>
+                            <td>
+                                <button class="action-btn view-btn">View</button>
+                                <button class="action-btn edit-btn">Edit</button>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>MBF002</td>
+                            <td>Mary Wanjiku</td>
+                            <td>Bahati</td>
+                            <td>Programs</td>
+                            <td>Program Manager</td>
+                            <td><span class="status-active">Active</span></td>
+                            <td>
+                                <button class="action-btn view-btn">View</button>
+                                <button class="action-btn edit-btn">Edit</button>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>MBF003</td>
+                            <td>James Mwangi</td>
+                            <td>Dundori</td>
+                            <td>Finance</td>
+                            <td>Accountant</td>
+                            <td><span class="status-leave">On Leave</span></td>
+                            <td>
+                                <button class="action-btn view-btn">View</button>
+                                <button class="action-btn edit-btn">Edit</button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+                
+                <div class="table-controls">
+                    <div class="pagination">
+                        <button class="page-btn">Previous</button>
+                        <span class="page-number">Page 1 of 5</span>
+                        <button class="page-btn">Next</button>
+                    </div>
+                    <div class="records-count">
+                        Showing 1-10 of 127 records
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Staff Management Section -->
+        <section id="staffSection" class="content-section" style="display:none;">
+            <div class="section-header">
+                <h2>Staff Management</h2>
+                <button id="addNewStaffBtn" class="section-btn">+ Add New Staff</button>
+            </div>
+            <div class="staff-grid">
+                <!-- Staff cards will be dynamically loaded here -->
+            </div>
+        </section>
+
+        <!-- Department Management Section -->
+        <section id="departmentsSection" class="content-section" style="display:none;">
+            <div class="section-header">
+                <h2>Department Management</h2>
+                <button id="addNewDeptBtn" class="section-btn">+ Add Department</button>
+            </div>
+            <div class="department-cards">
+                <!-- Department cards will be dynamically loaded here -->
+            </div>
+        </section>
+
+        <!-- Reports Section -->
+        <section id="reportsSection" class="content-section" style="display:none;">
+            <div class="section-header">
+                <h2>Reports</h2>
+                <div class="report-actions">
+                    <button id="generateReportBtn" class="section-btn">Generate Report</button>
+                    <button id="exportReportBtn" class="section-btn">Export to Excel</button>
+                </div>
+            </div>
+            <div class="report-filters">
+                <div class="filter-group">
+                    <label for="reportType">Report Type:</label>
+                    <select id="reportType">
+                        <option value="staff">Staff Directory</option>
+                        <option value="attendance">Attendance</option>
+                        <option value="leave">Leave Records</option>
+                        <option value="performance">Performance</option>
+                    </select>
+                </div>
+                <div class="filter-group">
+                    <label for="dateRange">Date Range:</label>
+                    <select id="dateRange">
+                        <option value="all">All Time</option>
+                        <option value="month">This Month</option>
+                        <option value="quarter">This Quarter</option>
+                        <option value="year">This Year</option>
+                        <option value="custom">Custom Range</option>
+                    </select>
+                </div>
+            </div>
+            <div class="report-results">
+                <!-- Report results will be displayed here -->
+            </div>
+        </section>
+    </main>
+
+    <!-- Staff Registration Modal (hidden by default) -->
+    <div id="staffModal" class="modal">
+        <div class="modal-content">
+            <span class="close-btn">&times;</span>
+            <h2>Register New Staff Member</h2>
+            <form id="staffForm" class="staff-form">
+                <!-- Personal Information Section -->
+                <fieldset>
+                    <legend>Personal Information</legend>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="nationalId">National ID*</label>
+                            <input type="text" id="nationalId" name="nationalId" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="staffId">Staff ID</label>
+                            <input type="text" id="staffId" name="staffId" readonly>
+                        </div>
+                    </div>
+                    
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="firstName">First Name*</label>
+                            <input type="text" id="firstName" name="firstName" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="middleName">Middle Name</label>
+                            <input type="text" id="middleName" name="middleName">
+                        </div>
+                        <div class="form-group">
+                            <label for="lastName">Last Name*</label>
+                            <input type="text" id="lastName" name="lastName" required>
+                        </div>
+                    </div>
+                    
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="gender">Gender*</label>
+                            <select id="gender" name="gender" required>
+                                <option value="">Select Gender</option>
+                                <option value="Male">Male</option>
+                                <option value="Female">Female</option>
+                                <option value="Other">Other</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="dob">Date of Birth*</label>
+                            <input type="date" id="dob" name="dob" required>
+                        </div>
+                    </div>
+                    
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="email">Email</label>
+                            <input type="email" id="email" name="email">
+                        </div>
+                        <div class="form-group">
+                            <label for="phone">Phone*</label>
+                            <input type="tel" id="phone" name="phone" required>
+                        </div>
+                    </div>
+                </fieldset>
+                
+                <!-- Employment Information Section -->
+                <fieldset>
+                    <legend>Employment Information</legend>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="ward">Ward*</label>
+                            <select id="ward" name="ward" required>
+                                <option value="">Select Ward</option>
+                                <option value="Bahati">Bahati</option>
+                                <option value="Kiamaina">Kiamaina</option>
+                                <option value="Dundori">Dundori</option>
+                                <option value="Lanet">Lanet</option>
+                                <option value="Kabatini">Kabatini</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="address">Address</label>
+                            <input type="text" id="address" name="address">
+                        </div>
+                    </div>
+                    
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="department">Department*</label>
+                            <select id="department" name="department" required>
+                                <option value="">Select Department</option>
+                                <option value="Administration">Administration</option>
+                                <option value="Programs">Programs</option>
+                                <option value="Finance">Finance</option>
+                                <option value="HR">Human Resources</option>
+                                <option value="Operations">Operations</option>
+                                <option value="M&E">Monitoring & Evaluation</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="rank">Position*</label>
+                            <select id="rank" name="rank" required>
+                                <option value="">Select Position</option>
+                                <option value="Executive Director">Executive Director</option>
+                                <option value="Program Manager">Program Manager</option>
+                                <option value="Finance Manager">Finance Manager</option>
+                                <option value="HR Manager">HR Manager</option>
+                                <option value="Field Officer">Field Officer</option>
+                                <option value="Accountant">Accountant</option>
+                                <option value="Admin Assistant">Administrative Assistant</option>
+                            </select>
+                        </div>
+                    </div>
+                    
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="employmentDate">Employment Date*</label>
+                            <input type="date" id="employmentDate" name="employmentDate" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="salary">Salary (KES)</label>
+                            <input type="number" id="salary" name="salary" step="0.01">
+                        </div>
+                    </div>
+                </fieldset>
+                
+                <!-- Additional Information Section -->
+                <fieldset>
+                    <legend>Additional Information</legend>
+                    <div class="form-group">
+                        <label for="photo">Photo</label>
+                        <input type="file" id="photo" name="photo" accept="image/*">
+                    </div>
+                    <div class="form-group">
+                        <label for="notes">Notes</label>
+                        <textarea id="notes" name="notes" rows="3"></textarea>
+                    </div>
+                </fieldset>
+                
+                <div class="form-actions">
+                    <button type="submit" class="submit-btn">Save Staff Record</button>
+                    <button type="button" class="cancel-btn">Cancel</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
